@@ -96,10 +96,39 @@ firefox -CreateProfile YOUR_PROFILE_NAME_HERE --headless --screenshot /dev/null
 cd ~/.config/mozilla/firefox/
 ls
 ```
-You are looking for the profile you just created.
-Firefox adds an eight character prefix to profile folders
-XXXXXXXX.YOUR_PROFILE_NAME
+You are looking for the profile you just created.  
+Firefox adds an eight character prefix to profile folders  
+XXXXXXXX.YOUR_PROFILE_NAME  
+Then move into that folder and start writing in a file called "user.js"
 ```
 cd /XXXXXXXX.YOUR_PROFILE_NAME
 nano user.js
+```
+I put a BUNCH of stuff in here.  I break everything down [here](firefox.md).
+```
+user_pref("browser.sessionstore.resume_from_crash", false);
+user_pref("browser.ai.control.default", "blocked");
+user_pref("browser.ai.control.linkPreviewKeyPoints", "blocked");
+user_pref("browser.ai.control.pdfjsAltText", "blocked");
+user_pref("browser.ai.control.sidebarChatbot", "blocked");
+user_pref("browser.ai.control.smartTabGroups", "blocked");
+user_pref("browser.ai.control.translations", "blocked");
+user_pref("browser.newtabpage.activity-stream.feeds.section.topstories", false);
+user_pref("browser.newtabpage.activity-stream.showSponsored", false);
+user_pref("browser.newtabpage.activity-stream.showSponsoredCheckboxes", false);
+user_pref("browser.newtabpage.activity-stream.showSponsoredTopSites", false);
+user_pref("browser.newtabpage.disableNewTabAsAddon", true);
+user_pref("browser.profiles.enabled", false);
+user_pref("browser.shell.checkDefaultBrowser", false);
+user_pref("browser.shell.defaultBrowserCheckCount", 1);
+user_pref("browser.shell.didSkipDefaultBrowserCheckOnFirstRun", true);
+user_pref("browser.tabs.groups.smart.enabled", false);
+user_pref("browser.tabs.groups.smart.userEnabled", false);
+user_pref("datareporting.healthreport.uploadEnabled", false);
+user_pref("datareporting.policy.firstRunURL", "");
+user_pref("datareporting.usage.uploadEnabled", false);
+user_pref("extensions.formautofill.addresses.enabled", false);
+user_pref("extensions.formautofill.creditCards.enabled", false);
+user_pref("signon.rememberSignons", false);
+user_pref("trailhead.firstrun.didSeeAboutWelcome", true);
 ```
