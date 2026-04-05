@@ -10,6 +10,16 @@ Basic Commands
 - `sudo` - Elevates the command priviledge.  Allows you to do things that change the system that regular permissions wouldn't allow.
 - `apt` - The package manager for Debian.  It will grab software from pre-configured sources and install them on your system.
 - `nano` - Lightweight text editor.  To save a file, ctrl + o.  To exit, ctrl + x.
+  - If you are coming from Windows, this is a shift.  If I type the command `nano foo.bar`, it will create a file (if one doesn't exist) "foo" of file type "bar" and let me start typing in it.
+- `cd` - Change Directory.  Basically navigates through the file system.
+  - Most terminals will autocomplete, ie, if you start filling out a directory name, you can hit tab to fill in the rest.
+  - The `cd` command by itself takes you back to the home directory (where you start).
+  - `.` is the current directory, ie, `cd .` takes you to the directory you are in.
+  - `..` is the previous directory, ie, `cd ..` takes up up a level.
+  - `~` is the home directory.
+- `mkdir` - Creates a directory.
+- `rm` - Remove.  Pretty self explanatory.
+- `ls` - List.  Gives information about directory contents.
 
 ### 1. Update and Install
 - SSH into your pi.
@@ -34,7 +44,7 @@ sudo apt install labwc
 - Creat a PAM configuration file for your specific user
 PAM manages permissions for services and allows labwc to start with automatic login
 ```
-sudo nano /etc/pam.d/YOUR_USERNAME
+sudo nano /etc/pam.d/YOUR_USERNAME_HERE
 ```
 - Paste in the following:
 ```
@@ -43,12 +53,53 @@ account required    pam_unix.so
 session required    pam_unix.so
 session required    pam_systemd.so
 ```
-- Setup autostart
+> Setup labwc autostart
+> This the startup script that labwc uses.  It does not start labwc itself.
 ```
 sudo nano ~/.config/labwc/autostart
 ```
-- Paste in the following:
+> Paste in the following:
 ```
 /usr/bin/firefox \
-  -url http://192.168.69.21:8123 &
+  -url https://YOUR_URL_HERE &
+```
+- Setup labwc start on login
+> This is a script that is run on login.
+> Since we have autologin setup, it will run at startup.
+```
+sudo nano ~/.bash_profile
+```
+> Paste in the following:
+> This checks if the tty is tty1 and that there is no Wayland instance running.
+> If both are true, it starts a dbus session with labwc.
+```
+# Start labwc only on tty1
+if [ "$(tty)" = "/dev/tty1" ] && [ -z "$WAYLAND_DISPLAY" ]; then
+  exec dbus-run-session labwc
+fi
+```
+#### If you want to stop and reboot here to make sure it works, the command for that is ```sudo reboot```.  If not, just keep reading.
+### 3. Setup Firefox
+- Firefox is weird with their use of profiles so we are going to do this.
+```
+firefox -CreateProfile YOUR_PROFILE_NAME_HERE --headless --screenshot /dev/null
+```
+> This does a few things:  
+- `firefox` Starts Firefox
+- `--CreateProfile` Creates the profile with the name you specified
+- `--headless` Runs headless, as in Firefox doesn't display anything
+- `--screenshot` Forces Firefox to fully start, as apposed to just creating the profile, which we want.
+- `/dev/null` Send that screenshot and any output straight to nowhere, since we don't want it.
+
+- Move to the directory where firefox stores information and show the contents.
+```
+cd ~/.config/mozilla/firefox/
+ls
+```
+You are looking for the profile you just created.
+Firefox adds an eight character prefix to profile folders
+XXXXXXXX.YOUR_PROFILE_NAME
+```
+cd /XXXXXXXX.YOUR_PROFILE_NAME
+nano user.js
 ```
