@@ -9,7 +9,7 @@ This is a kindergarten guide.  I'm gonna break down everything cause I'm tired o
 Basic Commands
 - `sudo` - Elevates the command priviledge.  Allows you to do things that change the system that regular permissions wouldn't allow.
 - `apt` - The package manager for Debian.  It will grab software from pre-configured sources and install them on your system.
-- `nano` - Lightweight text editor.  To save a file, ctrl + o.  To exit, ctrl + x.
+- `nano` - Lightweight text editor.  To save a file, ctrl + o.  To exit, ctrl + x. To find text, ctrl + w.
   - If you are coming from Windows, this is a shift.  If I type the command `nano foo.bar`, it will create a file (if one doesn't exist) "foo" of file type "bar" and let me start typing in it.
 - `cd` - Change Directory.  Basically navigates through the file system.
   - Most terminals will autocomplete, ie, if you start filling out a directory name, you can hit tab to fill in the rest.
