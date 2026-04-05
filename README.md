@@ -38,14 +38,14 @@ I did full tests with X and Wayland to see which was faster.  I also tested Chro
 - Wayland + labwc
   - I really wanted to go with Cage-Kiosk.  It felt super responsive.  Unfortunately, it doesn't yet support OSKs. See [cage #345](https://github.com/cage-kiosk/cage/pull/345)
   - When it does, I may revisit this.
-- Firefox (browser)
+- Firefox/Chromium (browser)
 - Squeekboard (OSK)
 - Swayidle + ImmichFrame (screensaver)
 - Squeezelite (Music)
 
 ### [What I Didn't Go With (X) But Have Guides For](xSetup.md)
  - X11/Xorg + openbox
- - Firefox/Chromium (browser_
+ - Firefox/Chromium (browser)
  - onboard (OSK)
- - xScreensaver + webscreensaver
+ - xScreensaver + webscreensaver (screensaver)
  - Squeezelite (Music)
