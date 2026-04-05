@@ -135,3 +135,46 @@ user_pref("extensions.formautofill.creditCards.enabled", false);
 user_pref("signon.rememberSignons", false);
 user_pref("trailhead.firstrun.didSeeAboutWelcome", true);
 ```
+### 4. On Screen Keyboard
+For my OSK I went with [squeekboard](https://gitlab.gnome.org/World/Phosh/squeekboard).  The good folks at Raspberry Pi [forked](https://github.com/raspberrypi-ui/squeekboard) it and have it on one of their official repositories.  
+I tried [Maliit Keyboard](https://github.com/maliit/keyboard) but I just could not get it to work.  
+Unfortunately, squeekboard had it's own set of issues.  
+#### Default behavior.
+> 1. Tap a text input area on screen.
+> 2. squeekboard shows from the bottom of the screen.
+> 3. Firefox window bottom is resized to the top of squeekboard.
+If this works for you, just install squeekboard like any other app and follow the directions for labwc autostart.
+#### My desired behavior.
+> 1. Tap a text input area on screen.
+> 2. squeekboard shows from the bottome of the screen.
+> 3. **squeekboard is drawn on top of the Firefox window.**
+
+Wayland has different "layers" that it draws on.  squeekboard, by [default](https://forums.raspberrypi.com/viewtopic.php?t=390053), is drawn on the top layer.  For my setup, I needed it drawn on the overlay layer.  
+Additionally, squeekboard's behavior is such that is draws an exclusion zone so that windows are resized.  
+These are the steps to edit the squeekboard code and compile on a raspberry pi.  
+> a. Change apt repositories.
+> > By default, the raspberry pi is setup to get software and updates from debian and raspberry pi official sources but it will not get source files, only compiled packages.  We need to change this since we are compiling from source.
+> > ```
+> > sudo nano /etc/apt/sources.list.d/raspi.sources
+> > ```
+> > The first line `Types: deb`, change it to `Types: deb deb-src`.
+> 
+> b. Update the package lists.
+> > ```
+> > sudo apt update
+> > ```
+> c. Create and move to a directory for our compilation.
+> > ```
+> > mkdir ~/squeekCompile && cd ~/squeekCompile
+> > ```
+> d. Get the source files.
+> > ```
+> > apt source squeekboard
+> > ```
+> > This downloads and unpacks the source files.  At the time I am writing this, the version is `squeekboard-1.43.1` but that can change.
+> > Use the `ls` command to see what was actually downloaded and what folder was created.
+> e. Edit the code with the changes.
+> > ```
+> > sudo nano /squeekboard-1.43.1/eek/layersurface.c
+> > ```
+> > Find the 
