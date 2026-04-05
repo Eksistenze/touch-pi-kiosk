@@ -59,8 +59,11 @@ session required    pam_systemd.so
 sudo nano ~/.config/labwc/autostart
 ```
 > Paste in the following:
+> For the profile name, this can be anything.  I used my username.  We will be creating it in step 3.
+> Just make sure to enter the profile name consistantly.
 ```
 /usr/bin/firefox \
+  -p YOUR_PROFILE_NAME_HERE \
   -url https://YOUR_URL_HERE &
 ```
 - Setup labwc start on login
