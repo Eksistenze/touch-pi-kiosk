@@ -53,19 +53,6 @@ account required    pam_unix.so
 session required    pam_unix.so
 session required    pam_systemd.so
 ```
-> Setup labwc autostart
-> This the startup script that labwc uses.  It does not start labwc itself.
-```
-sudo nano ~/.config/labwc/autostart
-```
-> Paste in the following:
-> For the profile name, this can be anything.  I used my username.  We will be creating it in step 3.
-> Just make sure to enter the profile name consistantly.
-```
-/usr/bin/firefox \
-  -p YOUR_PROFILE_NAME_HERE \
-  -url https://YOUR_URL_HERE &
-```
 - Setup labwc start on login
 > This is a script that is run on login.
 > Since we have autologin setup, it will run at startup.
@@ -81,14 +68,16 @@ if [ "$(tty)" = "/dev/tty1" ] && [ -z "$WAYLAND_DISPLAY" ]; then
   exec dbus-run-session labwc
 fi
 ```
-#### If you want to stop and reboot here to make sure it works, the command for that is ```sudo reboot```.  If not, just keep reading.
+#### If you want to stop and reboot here to make sure it works, the command for that is ```sudo reboot```.  The only thing you should see is a blank screen with a mouse pointer, since we haven't setup any applications.  If not, just keep reading.
 ### 3. Setup Browser
 I tested both Chromium and Firefox.  Chromium runs noticably better but I went with Firefox.
 - One, I support Firefox as an alternative to Chromium based browsers.
 - And two, I can install uBlock Origin and block ads.
-If you want to use Chromium, I've included instructions.
+If you want to use Chromium, I've included instructions.  
 [Chromium on Wayland](waylandChromium.md)  
 
+I want Firefox to just run.  No pop ups.  No ads.  Just start up and there is the site.
+To do this we are going to configure some preferences, but first we need to make a profile.
 A. Firefox is weird with their use of profiles so we are going to do this.
 > ```
 > firefox -CreateProfile YOUR_PROFILE_NAME_HERE --headless --screenshot /dev/null
@@ -144,7 +133,63 @@ C. Then move into that folder and start writing in a file called "user.js"
 D. Make Firefox run maximized.
 > Firefox has a kiosk mode that you can activate with the option `-kiosk` when launching.  
 > I didn't want that, nor did I want to run full screen.  
-> I want access to tabs and I may setup a process later to restart the machine when you close the Firefox window as a way of restarting the machine.
+>
+> Create `rc.xml`
+> ```
+> sudo nano ~/.config/labwc/rc.xml
+> ```
+> This is a file that changes the way labwc behaves.  You can change themes, set keybind and do all sorts of things with the config files.
+> Put this in there.
+> ```
+> <?xml version="1.0"?>
+> <labwc_config>
+> 
+>   <windowRules>
+>     <windowRule identifier="firefox">
+>       <action name="Maximize"/>
+>     </windowRule>
+>   </windowRules>
+> 
+> </labwc_config>
+> ```
+> xml files have specific formatting requirements so make sure you know what you are doing if you edit them.  
+> This creates a window rule that affects "firefox" and runs the action Maximize.
+E. Setup script for halt on close.
+> Create a folder to hold your startup scripts.
+> ```
+> sudo mkdir ~/.config/startup/
+> ```
+> Create Firefox script.
+> ```
+> sudo nano ~/.config/startup/firefox.sh
+> ```
+> Enter the following:
+> ```
+> #!/bin/bash
+> 
+> /usr/bin/firefox \
+>   -p YOUR_PROFILE_NAME_HERE
+>   -url https://YOUR.URL.HERE/
+> 
+> sudo /sbin/halt
+> ```
+> This is a **very** basic script.  
+> The first part `#!` is called the ["shebang"](https://en.wikipedia.org/wiki/Shebang_%28Unix%29).  It tells the OS what program we are using for the script, which is the next part, `/bin/bash`, the bash shell.  
+> The next part opens Firefox with the options specified.  
+> Because of how bash commands operate, that line is not finished until Firefox closes.  
+> Once Firefox closes, it continues with the halt command.
+>
+> Now we add it to labwc
+> ```
+> sudo nano ~/.config/labwc/autostart
+> ```
+> Add the following:
+> ```
+> /home/YOUR_USERNAME/.config/startup/firefox.sh &
+> ```
+> The `&` at the end of the command means that the process is run in the background.
+> However, it's still a good idea for the browser entry to be the last one in the labwc autostart file.
+#### Firefox is now setup and **should** start on boot, maximized, with no prompts or popups.
 ### 4. On Screen Keyboard
 The instructions for squeekboard, the on screen keyboard I went with, turned out to be pretty long and involved so I've separated it into it's only file.
 #### [squeekboard Guide](squeekboard.md)
