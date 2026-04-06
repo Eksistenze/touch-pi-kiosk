@@ -2,7 +2,7 @@
 This is a kindergarten guide.  I'm gonna break down everything cause I'm tired of guides that just tell you to do stuff and you have no idea what you are doing.
 ### 0. Pre-setup
 - Flash your SD card with Raspberry Pi OS Lite (64 bit)
-  - Setup WiFi (or use ethernet), user and password, and make sure SSH is enabled
+  - Setup WiFi (or use ethernet), username and password, and make sure SSH is enabled
   - 32 bit might work.  Who knows?  Not me.
 - Setup your pi and monitor
   - You might need a mouse and keyboard for the initial setup.  This guide assumes that you are doing everything through SSH.  But stuff updates, stuff breaks, you might have a different setup.  Having a keyboard and mouse can make troubleshooting easier.  
@@ -22,52 +22,53 @@ Basic Commands
 - `ls` - List.  Gives information about directory contents.
 
 ### 1. Update and Install
-- SSH into your pi.
-  - I used windows + Putty.  Mac and linux have command line SSH built in.  Your pi's IP address will be displayed on the monitor or you can check your router the IP it was assigned.
-- Make the pi login automatically on startup.  This will be a kiosk.  I didn't even want to setup a login screen.  
-```bash
-sudo raspi-config
-```  
-System Options > Auto Login > Yes > Exit Raspberry Pi Config
-- Update the pi.  The imager OS is from 2025-12-04.  Not that long ago but long enough to update some stuff.
-```bash
-sudo apt update
-sudo apt upgrade -y
-```
-- Install the Software
-  - This is the first set of software, just to get a desktop going.
-labwc is a wayland compositor inspired with openbox.  I've got no complaints.
-```
-sudo apt install labwc
-```
+A. SSH into your pi.
+> I used windows + Putty.  Mac and linux have command line SSH built in.  Your pi's IP address will be displayed on the monitor or you can check your router for the IP you were assigned.
+> Make the pi login automatically on startup.  This will be a kiosk.  I didn't even want to setup a login screen.  
+> ```bash
+> sudo raspi-config
+> ```  
+> System Options > Auto Login > Yes > Exit Raspberry Pi Config
+> 
+B. Update the pi.  The imager OS is from 2025-12-04.  Not that long ago but long enough to update some stuff.
+> ```bash
+> sudo apt update
+> sudo apt upgrade -y
+> ```
+C. Install the Software
+> This is the first set of software, just to get a desktop going.
+> labwc is a wayland compositor inspired with openbox.  I've got no complaints.
+> ```
+> sudo apt install labwc
+> ```
 ### 2. Setup labwc
-- Creat a PAM configuration file for your specific user
-PAM manages permissions for services and allows labwc to start with automatic login
-```
-sudo nano /etc/pam.d/YOUR_USERNAME_HERE
-```
-- Paste in the following:
-```
-auth    required    pam_unix.so nullok
-account required    pam_unix.so
-session required    pam_unix.so
-session required    pam_systemd.so
-```
-- Setup labwc start on login
+A. Creat a PAM configuration file for your specific user
+> PAM manages permissions for services and allows labwc to start with automatic login
+> ```
+> sudo nano /etc/pam.d/YOUR_USERNAME_HERE
+> ```
+> Paste in the following:
+> ```
+> auth    required    pam_unix.so nullok
+> account required    pam_unix.so
+> session required    pam_unix.so
+> session required    pam_systemd.so
+> ```
+B. Setup labwc start on login
 > This is a script that is run on login.
 > Since we have autologin setup, it will run at startup.
-```
-sudo nano ~/.bash_profile
-```
+> ```
+> sudo nano ~/.bash_profile
+> ```
 > Paste in the following:
 > This checks if the tty is tty1 and that there is no Wayland instance running.
 > If both are true, it starts a dbus session with labwc.
-```
-# Start labwc only on tty1
-if [ "$(tty)" = "/dev/tty1" ] && [ -z "$WAYLAND_DISPLAY" ]; then
-  exec dbus-run-session labwc
-fi
-```
+> ```
+> # Start labwc only on tty1
+> if [ "$(tty)" = "/dev/tty1" ] && [ -z "$WAYLAND_DISPLAY" ]; then
+>   exec dbus-run-session labwc
+> fi
+> ```
 #### If you want to stop and reboot here to make sure it works, the command for that is ```sudo reboot```.  The only thing you should see is a blank screen with a mouse pointer, since we haven't setup any applications.  If not, just keep reading.
 ### 3. Setup Browser
 I tested both Chromium and Firefox.  Chromium runs noticably better but I went with Firefox.
@@ -82,16 +83,17 @@ A. Install Firefox
 > ```
 > I want Firefox to just run.  No pop ups.  No ads.  Just start up and there is the site.
 > To do this we are going to configure some preferences, but first we need to make a profile.
+> 
 B. Firefox is weird with their use of profiles so we are going to do this.
 > ```
 > firefox -CreateProfile YOUR_PROFILE_NAME_HERE --headless --screenshot /dev/null
 > ```
 > This does a few things:  
-- `firefox` Starts Firefox
-- `--CreateProfile` Creates the profile with the name you specified
-- `--headless` Runs headless, as in Firefox doesn't display anything
-- `--screenshot` Forces Firefox to fully start, as apposed to just creating the profile, which we want.
-- `/dev/null` Send that screenshot and any output straight to nowhere, since we don't want it.
+> - `firefox` Starts Firefox
+> - `--CreateProfile` Creates the profile with the name you specified
+> - `--headless` Runs headless, as in Firefox doesn't display anything
+> - `--screenshot` Forces Firefox to fully start, as apposed to just creating the profile, which we want.
+> - `/dev/null` Send that screenshot and any output straight to nowhere, since we don't want it.
 
 C. Move to the directory where firefox stores information and show the contents.
 > ```
@@ -100,7 +102,8 @@ C. Move to the directory where firefox stores information and show the contents.
 > ```
 > You are looking for the profile you just created.  
 > Firefox adds an eight character prefix to profile folders  
-> XXXXXXXX.YOUR_PROFILE_NAME  
+> XXXXXXXX.YOUR_PROFILE_NAME
+> 
 D. Then move into that folder and start writing in a file called "user.js"
 > ```
 > cd /XXXXXXXX.YOUR_PROFILE_NAME
@@ -134,7 +137,7 @@ D. Then move into that folder and start writing in a file called "user.js"
 > user_pref("signon.rememberSignons", false);
 > user_pref("trailhead.firstrun.didSeeAboutWelcome", true);
 > ```
-D. Make Firefox run maximized.
+E. Make Firefox run maximized.
 > Firefox has a kiosk mode that you can activate with the option `-kiosk` when launching.  
 > I didn't want that, nor did I want to run full screen.  
 >
@@ -158,6 +161,7 @@ D. Make Firefox run maximized.
 > ```
 > xml files have specific formatting requirements so make sure you know what you are doing if you edit them.  
 > This creates a window rule that affects "firefox" and runs the action Maximize.
+> 
 F. Setup script for halt on close.
 > Create a folder to hold your startup scripts.
 > ```
@@ -189,6 +193,7 @@ F. Setup script for halt on close.
 > ```
 > A basic safety feature on linux is that scripts can't just run.  They have to have permission.
 > This gives the file executable priviledges.
+> 
 G. Start Firefox on boot.
 > ```
 > sudo nano ~/.config/labwc/autostart
@@ -210,6 +215,7 @@ I want a screensaver that displays a slideshow of pictures.
 Fortunately, I am running Immich on unraid so I already have my photos on my network.  
 You need to setup [ImmichFrame](https://immichframe.dev/) with [Immich](https://immich.app/) for this to work.  
 That setup is outside of the scope of this guide.  If you want something simpler, lookup [swayimg](https://github.com/artemsen/swayimg) or [swaybg](https://github.com/swaywm/swaybg)
+
 A. Install the software.
 > ```
 > sudo apt install swayidle
@@ -223,6 +229,7 @@ A. Install the software.
 > `cd` moves you to the home directory.
 > `wget` downloads the ImmichFrame Desktop linux client from their respository.  
 > `apt` installs the package we just downloaded.
+> 
 B. Setup swayidle
 > ```
 > sudo nano ~/.config/labwc/autostart
@@ -243,6 +250,7 @@ B. Setup swayidle
 > `timeout 600` The amount of seconds before swayidle performs the action.
 > `GDK_BACKEND=wayland GDK_GL=gles` Variables to make immichFrame run better in Wayland.
 > `resume 'pkill immichframe'` What to do on activity, which is kill the immichFrame process.
+> > 
 C. Setup immichFrame
 > Ensure the immichFrame folder has been created.
 > ```
