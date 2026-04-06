@@ -203,3 +203,59 @@ G. Start Firefox on boot.
 ### 4. On Screen Keyboard
 The instructions for squeekboard, the on screen keyboard I went with, turned out to be pretty long and involved so I've separated it into it's only file.
 #### [squeekboard Guide](squeekboard.md)
+### 5. Screensaver
+This part is a bit hacky.  Wayland, and linux in general, have decided that there is no need for screensavers anymore.  
+I understand that there is no need.  I don't need one.  But I want it.  
+I want a screensaver that displays a slideshow of pictures.  
+Fortunately, I am running Immich on unraid so I already have my photos on my network.  
+You need to setup [ImmichFrame](https://immichframe.dev/) with [Immich](https://immich.app/) for this to work.  
+That setup is outside of the scope of this guide.  If you want something simpler, lookup [swayimg](https://github.com/artemsen/swayimg) or [swaybg](https://github.com/swaywm/swaybg)
+A. Install the software.
+> ```
+> sudo apt install swayidle
+> ```
+> swayidle is an app that does things after your machine has been idle.  You can set custom commands and specify time as well as what happens after activity.
+> ```
+> cd
+> sudo wget https://github.com/immichFrame/ImmichFrame_Desktop/releases/download/v0.1.0/immichframe_0.1.0_LINUX_arm64.deb
+> sudo apt install ./immichframe_0.1.0_LINUX_arm64.deb
+> ```
+> `cd` moves you to the home directory.
+> `wget` downloads the ImmichFrame Desktop linux client from their respository.  
+> `apt` installs the package we just downloaded.
+B. Setup swayidle
+> ```
+> sudo nano ~/.config/labwc/autostart
+> ```
+> Add the following:
+> ```
+> /usr/bin/swayidle -w \
+>   timeout 600 'GDK_BACKEND=wayland GDK_GL=gles immichframe' \
+>   resume 'pkill immichframe' &
+> ```
+> This adds the swayidle binary to labwc autostart.  
+> The `-w` wait option means that it waits for immichFrame to finish before it continues.  
+> Behavior:
+> > ImmichFrame has areas on screen that allow for pausing, next and previous picture, and exit.  
+> > To exit the screensaver, tap towards the bottom of the screen.
+> Behavior without `-w`:
+> > Any touch on the screen kills the process.
+> `timeout 600` The amount of seconds before swayidle performs the action.
+> `GDK_BACKEND=wayland GDK_GL=gles` Variables to make immichFrame run better in Wayland.
+> `resume 'pkill immichframe'` What to do on activity, which is kill the immichFrame process.
+C. Setup immichFrame
+> Ensure the immichFrame folder has been created.
+> ```
+> sudo mkdir ~/.config/immichFrame/
+> ```
+> Create and edit settings file.
+> ```
+> sudo nano ~/.config/immichFrame/Settings.txt
+> ```
+> Enter the following:
+> ```
+> https://YOUR.IMMICHFRAME.URL/
+> ```
+#### Screensaver is now setup.
+### 6. Audio (squeezlite)
+As the steps for 
