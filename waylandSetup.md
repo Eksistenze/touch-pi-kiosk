@@ -76,9 +76,13 @@ I tested both Chromium and Firefox.  Chromium runs noticably better but I went w
 If you want to use Chromium, I've included instructions.  
 [Chromium on Wayland](waylandChromium.md)  
 
-I want Firefox to just run.  No pop ups.  No ads.  Just start up and there is the site.
-To do this we are going to configure some preferences, but first we need to make a profile.
-A. Firefox is weird with their use of profiles so we are going to do this.
+A. Install Firefox
+> ```
+> sudo apt install firefox
+> ```
+> I want Firefox to just run.  No pop ups.  No ads.  Just start up and there is the site.
+> To do this we are going to configure some preferences, but first we need to make a profile.
+B. Firefox is weird with their use of profiles so we are going to do this.
 > ```
 > firefox -CreateProfile YOUR_PROFILE_NAME_HERE --headless --screenshot /dev/null
 > ```
@@ -89,7 +93,7 @@ A. Firefox is weird with their use of profiles so we are going to do this.
 - `--screenshot` Forces Firefox to fully start, as apposed to just creating the profile, which we want.
 - `/dev/null` Send that screenshot and any output straight to nowhere, since we don't want it.
 
-B. Move to the directory where firefox stores information and show the contents.
+C. Move to the directory where firefox stores information and show the contents.
 > ```
 > cd ~/.config/mozilla/firefox/
 > ls
@@ -97,7 +101,7 @@ B. Move to the directory where firefox stores information and show the contents.
 > You are looking for the profile you just created.  
 > Firefox adds an eight character prefix to profile folders  
 > XXXXXXXX.YOUR_PROFILE_NAME  
-C. Then move into that folder and start writing in a file called "user.js"
+D. Then move into that folder and start writing in a file called "user.js"
 > ```
 > cd /XXXXXXXX.YOUR_PROFILE_NAME
 > nano user.js
@@ -154,7 +158,7 @@ D. Make Firefox run maximized.
 > ```
 > xml files have specific formatting requirements so make sure you know what you are doing if you edit them.  
 > This creates a window rule that affects "firefox" and runs the action Maximize.
-E. Setup script for halt on close.
+F. Setup script for halt on close.
 > Create a folder to hold your startup scripts.
 > ```
 > sudo mkdir ~/.config/startup/
@@ -179,7 +183,7 @@ E. Setup script for halt on close.
 > Because of how bash commands operate, that line is not finished until Firefox closes.  
 > Once Firefox closes, it continues with the halt command.
 >
-> Now we add it to labwc
+G. Start Firefox on boot.
 > ```
 > sudo nano ~/.config/labwc/autostart
 > ```
