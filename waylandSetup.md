@@ -82,11 +82,17 @@ if [ "$(tty)" = "/dev/tty1" ] && [ -z "$WAYLAND_DISPLAY" ]; then
 fi
 ```
 #### If you want to stop and reboot here to make sure it works, the command for that is ```sudo reboot```.  If not, just keep reading.
-### 3. Setup Firefox
-- Firefox is weird with their use of profiles so we are going to do this.
-```
-firefox -CreateProfile YOUR_PROFILE_NAME_HERE --headless --screenshot /dev/null
-```
+### 3. Setup Browser
+I tested both Chromium and Firefox.  Chromium runs noticably better but I went with Firefox.
+- One, I support Firefox as an alternative to Chromium based browsers.
+- And two, I can install uBlock Origin and block ads.
+If you want to use Chromium, I've included instructions.
+[Chromium on Wayland](waylandChromium.md)  
+
+A. Firefox is weird with their use of profiles so we are going to do this.
+> ```
+> firefox -CreateProfile YOUR_PROFILE_NAME_HERE --headless --screenshot /dev/null
+> ```
 > This does a few things:  
 - `firefox` Starts Firefox
 - `--CreateProfile` Creates the profile with the name you specified
@@ -94,47 +100,51 @@ firefox -CreateProfile YOUR_PROFILE_NAME_HERE --headless --screenshot /dev/null
 - `--screenshot` Forces Firefox to fully start, as apposed to just creating the profile, which we want.
 - `/dev/null` Send that screenshot and any output straight to nowhere, since we don't want it.
 
-- Move to the directory where firefox stores information and show the contents.
-```
-cd ~/.config/mozilla/firefox/
-ls
-```
-You are looking for the profile you just created.  
-Firefox adds an eight character prefix to profile folders  
-XXXXXXXX.YOUR_PROFILE_NAME  
-Then move into that folder and start writing in a file called "user.js"
-```
-cd /XXXXXXXX.YOUR_PROFILE_NAME
-nano user.js
-```
-I put a BUNCH of stuff in here.  I break everything down [here](firefox.md).
-```js
-user_pref("browser.sessionstore.resume_from_crash", false);
-user_pref("browser.ai.control.default", "blocked");
-user_pref("browser.ai.control.linkPreviewKeyPoints", "blocked");
-user_pref("browser.ai.control.pdfjsAltText", "blocked");
-user_pref("browser.ai.control.sidebarChatbot", "blocked");
-user_pref("browser.ai.control.smartTabGroups", "blocked");
-user_pref("browser.ai.control.translations", "blocked");
-user_pref("browser.newtabpage.activity-stream.feeds.section.topstories", false);
-user_pref("browser.newtabpage.activity-stream.showSponsored", false);
-user_pref("browser.newtabpage.activity-stream.showSponsoredCheckboxes", false);
-user_pref("browser.newtabpage.activity-stream.showSponsoredTopSites", false);
-user_pref("browser.newtabpage.disableNewTabAsAddon", true);
-user_pref("browser.profiles.enabled", false);
-user_pref("browser.shell.checkDefaultBrowser", false);
-user_pref("browser.shell.defaultBrowserCheckCount", 1);
-user_pref("browser.shell.didSkipDefaultBrowserCheckOnFirstRun", true);
-user_pref("browser.tabs.groups.smart.enabled", false);
-user_pref("browser.tabs.groups.smart.userEnabled", false);
-user_pref("datareporting.healthreport.uploadEnabled", false);
-user_pref("datareporting.policy.firstRunURL", "");
-user_pref("datareporting.usage.uploadEnabled", false);
-user_pref("extensions.formautofill.addresses.enabled", false);
-user_pref("extensions.formautofill.creditCards.enabled", false);
-user_pref("signon.rememberSignons", false);
-user_pref("trailhead.firstrun.didSeeAboutWelcome", true);
-```
+B. Move to the directory where firefox stores information and show the contents.
+> ```
+> cd ~/.config/mozilla/firefox/
+> ls
+> ```
+> You are looking for the profile you just created.  
+> Firefox adds an eight character prefix to profile folders  
+> XXXXXXXX.YOUR_PROFILE_NAME  
+C. Then move into that folder and start writing in a file called "user.js"
+> ```
+> cd /XXXXXXXX.YOUR_PROFILE_NAME
+> nano user.js
+> ```
+> I put a BUNCH of stuff in here.  I break everything down [here](firefox.md).
+> ```js
+> user_pref("browser.sessionstore.resume_from_crash", false);
+> user_pref("browser.ai.control.default", "blocked");
+> user_pref("browser.ai.control.linkPreviewKeyPoints", "blocked");
+> user_pref("browser.ai.control.pdfjsAltText", "blocked");
+> user_pref("browser.ai.control.sidebarChatbot", "blocked");
+> user_pref("browser.ai.control.smartTabGroups", "blocked");
+> user_pref("browser.ai.control.translations", "blocked");
+> user_pref("browser.newtabpage.activity-stream.feeds.section.topstories", false);
+> user_pref("browser.newtabpage.activity-stream.showSponsored", false);
+> user_pref("browser.newtabpage.activity-stream.showSponsoredCheckboxes", false);
+> user_pref("browser.newtabpage.activity-stream.showSponsoredTopSites", false);
+> user_pref("browser.newtabpage.disableNewTabAsAddon", true);
+> user_pref("browser.profiles.enabled", false);
+> user_pref("browser.shell.checkDefaultBrowser", false);
+> user_pref("browser.shell.defaultBrowserCheckCount", 1);
+> user_pref("browser.shell.didSkipDefaultBrowserCheckOnFirstRun", true);
+> user_pref("browser.tabs.groups.smart.enabled", false);
+> user_pref("browser.tabs.groups.smart.userEnabled", false);
+> user_pref("datareporting.healthreport.uploadEnabled", false);
+> user_pref("datareporting.policy.firstRunURL", "");
+> user_pref("datareporting.usage.uploadEnabled", false);
+> user_pref("extensions.formautofill.addresses.enabled", false);
+> user_pref("extensions.formautofill.creditCards.enabled", false);
+> user_pref("signon.rememberSignons", false);
+> user_pref("trailhead.firstrun.didSeeAboutWelcome", true);
+> ```
+D. Make Firefox run maximized.
+> Firefox has a kiosk mode that you can activate with the option `-kiosk` when launching.  
+> I didn't want that, nor did I want to run full screen.  
+> I want access to tabs and I may setup a process later to restart the machine when you close the Firefox window as a way of restarting the machine.
 ### 4. On Screen Keyboard
 The instructions for squeekboard, the on screen keyboard I went with, turned out to be pretty long and involved so I've separated it into it's only file.
 #### [squeekboard Guide](squeekboard.md)
