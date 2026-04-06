@@ -183,6 +183,12 @@ F. Setup script for halt on close.
 > Because of how bash commands operate, that line is not finished until Firefox closes.  
 > Once Firefox closes, it continues with the halt command.
 >
+> Make the script executable.
+> ```
+> sudo chmod +x ~/config/startup/firefox.sh
+> ```
+> A basic safety feature on linux is that scripts can't just run.  They have to have permission.
+> This gives the file executable priviledges.
 G. Start Firefox on boot.
 > ```
 > sudo nano ~/.config/labwc/autostart
