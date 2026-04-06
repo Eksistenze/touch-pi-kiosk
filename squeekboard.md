@@ -3,14 +3,14 @@ For my OSK I went with [squeekboard](https://gitlab.gnome.org/World/Phosh/squeek
 I tried [Maliit Keyboard](https://github.com/maliit/keyboard) but I just could not get it to work.  
 Unfortunately, squeekboard had it's own set of issues.  
 #### Default behavior.
-> - Tap a text input area on screen.
-> - squeekboard shows from the bottom of the screen.
-> - Firefox window bottom is resized to the top of squeekboard.
+- Tap a text input area on screen.
+- squeekboard shows from the bottom of the screen.
+- Firefox window bottom is resized to the top of squeekboard.
 If this works for you, just install squeekboard like any other app and follow the directions for labwc autostart.
 #### My desired behavior.
-> - Tap a text input area on screen.
-> - squeekboard shows from the bottome of the screen.
-> - squeekboard is drawn ***on top of*** the Firefox window.
+- Tap a text input area on screen.
+- squeekboard shows from the bottome of the screen.
+- squeekboard is drawn ***on top of*** the Firefox window.
 
 Wayland has different "layers" that it draws on.  squeekboard, by [default](https://forums.raspberrypi.com/viewtopic.php?t=390053), is drawn on the top layer.  
 For my setup, I wanted it drawn on the overlay layer.  
