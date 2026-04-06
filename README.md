@@ -4,7 +4,7 @@ If you want to get right to the guides the links are below.  If you want to read
 
 [Wayland Setup](waylandSetup.md)
 
-[X/Xorg/X11 Setup](waylandSetup.md)
+[X/Xorg/X11 Setup](xSetup.md)
 
 ---
 
