@@ -258,4 +258,8 @@ C. Setup immichFrame
 > ```
 #### Screensaver is now setup.
 ### 6. Audio (squeezlite)
-As the steps for 
+As the steps for squeezlite are the same on Wayland and X, I have them in a separate page.
+[Squeezelite Setup](squeezelite.md)
+### 7. Finished!(?)
+That should be it.  If you think of anything else to add, please raise an issue.
+Any problems, do the same.
