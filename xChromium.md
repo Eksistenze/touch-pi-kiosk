@@ -1,6 +1,7 @@
 # Setup Chromium on X11
 Chromium is a bit simpler to run due to it's use of option flags.  
-A. Install Chromium
+A. Ensure Chromium is installed.
+> If you are following the guide, you should have alread done that but, if not, this is the commmand.
 > ```
 > sudo apt install chromium
 > ```
