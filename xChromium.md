@@ -27,7 +27,7 @@ B. Setup script to start Chromium and halt on stop.
 > sudo /sbin/halt
 > ```
 > This is a **very** basic script.  
-> The first part `#!` is called the ["shebang"](https://en.wikipedia.org/wiki/Shebang_%28Unix%29).
+> The first part `#!` is called the ["shebang"](https://en.wikipedia.org/wiki/Shebang_%28Unix%29).  
 > It tells the OS what program we are using for the script, which is the next part, `/bin/bash`, the bash shell.  
 > The next part opens Chromium with the options specified.  
 > `--no-first-run` Skips the annoying first run questions.  
