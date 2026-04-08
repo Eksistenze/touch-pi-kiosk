@@ -77,14 +77,12 @@ D. Setup openbox startup
 > ```
 > These turn off the energy star features, turn off screen blanking and turn off the screensaver.  We want to control all of that ourselves.
 E. Setup browser.
+> I've splite the browser into two setups, depending on what you go with.  
+> [Chromium](xChromium.md) and [Firefox](xFirefox.md)
+> 
+> If you wanna stop here and setup your own stuff, the pi should now startup with your browser.
+> 
 
--------------------------------------------------
-sudo nano /etc/xdg/openbox/autostart
-
-xset -dpms            # turn off display power management system
-xset s noblank        # turn off screen blanking
-xset s off            # turn off screen saver
-squeezelite -n $PLAYER_NAME -o $SOUND_DEVICE -s $SERVER_IP &
 > squeezelite -n $PLAYER_NAME -o $SOUND_DEVICE -s $SERVER_IP &
 > unclutter-xfixes --timeout 8 --hide-on-touch &
 > /home/eksistenze/.config/startup/firefox.sh &
