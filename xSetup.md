@@ -42,26 +42,42 @@ C. Install the Software
 > This installs xorg and x11 packages with only dependencies, no extras.
 > Openbox is the window manager we'll be using and we'll use xinit to start everything.
 > ```
-> sudo apt install firefox xscreensaver unclutter onboard -y
+> sudo apt install firefox xscreensaver unclutter-xfixes onboard -y
 > ```
 > or
 > ```
-> sudo apt install chromium xscreensaver unclutter onboard -y
+> sudo apt install chromium xscreensaver unclutter-xfixes onboard -y
 > ```
 > Depnding on whether you are going for Firefox or Chromium.  I honestly didn't notice that much of a difference between them.
+D. Setup openbox startup
+> ```
+> sudo nano ~/.profile
+> ```
+> This file is already setup on your raspberry pi.  
+> Just add this to the end.
+> ```
+> [[ -z $DISPLAY && $XDG_VTNR -eq 1 ]] && exec xinit /usr/bin/openbox-session -- vt$(fgconsole)
+> ```
+> `-z $DISPLAY` Check if that variable is empty, ie, there is no display currently running.  
+> `$XDG_VTNR -eq 1` Checks if this is TTY1, or, the terminal you log into (auto log into) when starting your pi.  
+> `xinit` The tool that starts the window manager.  
+> `/usr/bin/openbox-session` Location of what xinit is running.  
+> `vt$(fgconsole)` Tells xinit to start on the current virtual console.  
+>
+> Next went want to setup the openbox autostart file.  
+> This is the file that we put everything that openbox needs to start.
+> ```
+> sudo nano /etc/xdg/openbox/autostart
+> ```
+> Put this inside:
+> ```
+> xset -dpms
+> xset s noblank
+> xset s off
+> ```
+> These turn off the energy star features, turn off screen blanking and turn off the screensaver.  We want to control all of that ourselves.
+E. Setup browser.
 
-sudo raspi-config
-System Options
-    > Auto Login
-		> Yes
-
-sudo apt update & sudo apt upgrade -y
-sudo apt install --no-install-recommends xserver-xorg x11-xserver-utils xinit xterm openbox -y
-sudo apt install firefox chromium xscreensaver unclutter onboard python3 python3-gi gir1.2-webkit2-4.1 gir1.2-gtk-3.0 -y
-
-sudo apt install firefox xscreensaver unclutter onboard -y
-or
-sudo apt install chromium xscreensaver unclutter onboard -y
 -------------------------------------------------
 sudo nano /etc/xdg/openbox/autostart
 
@@ -69,10 +85,11 @@ xset -dpms            # turn off display power management system
 xset s noblank        # turn off screen blanking
 xset s off            # turn off screen saver
 squeezelite -n $PLAYER_NAME -o $SOUND_DEVICE -s $SERVER_IP &
-unclutter &
-/home/eksistenze/.config/startup/firefox.sh &
-xscreensaver -no-splash &
-onboard &
+> squeezelite -n $PLAYER_NAME -o $SOUND_DEVICE -s $SERVER_IP &
+> unclutter-xfixes --timeout 8 --hide-on-touch &
+> /home/eksistenze/.config/startup/firefox.sh &
+> xscreensaver -no-splash &
+> onboard &
 -------------------------------------------------
 sudo mkdir ~/.config/startup/
 sudo nano ~/.config/startup/firefox.sh
