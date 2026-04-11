@@ -1,7 +1,7 @@
 # Setup Chromium on X11
 Chromium is a bit simpler to run due to it's use of option flags.  
 A. Ensure Chromium is installed.
-> If you are following the guide, you should have alread done that but, if not, this is the commmand.
+> If you are following the guide, you should have already done that but, if not, this is the command.
 > ```
 > sudo apt install chromium
 > ```
@@ -33,7 +33,7 @@ B. Setup script to start Chromium and halt on stop.
 > The next part opens Chromium with the options specified.  
 > `--no-first-run` Skips the annoying first run questions.  
 > `--no-default-browser-check` Doesn't check if Chromium is the default browser.  
-> `--noerrdialogs` Supresses error dialogs.  
+> `--noerrdialogs` Suppresses error dialogs.  
 > `https://YOUR.URL.HERE/` The URL that opens on start.  
 > Because of how bash commands operate, that line is not finished until Chromium closes.  
 > Once Chromium closes, it continues with the halt command.  
@@ -43,7 +43,7 @@ B. Setup script to start Chromium and halt on stop.
 > sudo chmod +x ~/.config/startup/chromium.sh
 > ```
 > A basic safety feature on linux is that scripts can't just run.  They have to have permission.  
-> This gives the file executable priviledges.
+> This gives the file executable privileges.
 > 
 C. Add Chromium to openbox autostart
 > ```
