@@ -75,8 +75,10 @@ D. Setup openbox startup
 > xset -dpms
 > xset s noblank
 > xset s off
+> unclutter-xfixes --timeout 8 --hide-on-touch &
 > ```
 > These turn off the energy star features, turn off screen blanking and turn off the screensaver.  We want to control all of that ourselves.
+> It also starts `unclutter-xfixes`.  This is a utility that hides the mouse pointer and it good for touchscreens.
 ### 2. Setup browser.
 > I've splite the browser into two setups, depending on what you go with.  
 > [Chromium](xChromium.md) and [Firefox](xFirefox.md)  
@@ -127,7 +129,7 @@ If you wanna stop here and setup your own stuff, the pi should now startup with 
 > ```
 > Once these are configured, the keyboard should work.  You may have to restart.   
 > I also changed the theme for the keyboard but you can do that with the GUI.
-### Screensaver
+### 4. Screensaver
 `xscreensaver` is a wonderful program, first released in 1992!  
 While it has some EXCELLENT options that you should feel free to explore, I wanted a slideshow of pictures.  
 Google already has this functionality with it's Hub devices and I wanted to replicate that.  
@@ -210,233 +212,20 @@ Setting all that up is outside this guide's scope.  There are some great guides 
 > 
 > programs:                                                                     \
 >                                 webscreensaver -url                           \
->                                   http://192.168.69.246:8081/share/IRFVnvi4SmhA>
+>                                   https://YOUR.URL.HERE
 > ```
 > This is just the default config, edited so that webscreensaver is the only option.  
 > You can change the idle time for the screensaver in the `timeout` option.  
 > f. Add `xscreensaver` to the openbox autostart.
-> 
-
-
-
-sudo nano .xscreensaver
-alt + /
-ctrl + 6
-alt + \
-alt + t
-# XScreenSaver Preferences File
-# Written by xscreensaver-demo 6.09 for eksistenze on Mon Apr  6 22:14:29 2026.
-# https://www.jwz.org/xscreensaver/
-
-timeout:        0:10:00
-cycle:          0:10:00
-lock:           False
-lockTimeout:    0:00:00
-passwdTimeout:  0:00:30
-visualID:       default
-installColormap:    True
-verbose:        False
-splash:         True
-splashDuration: 0:00:05
-demoCommand:    xscreensaver-settings
-nice:           10
-fade:           True
-unfade:         True
-fadeSeconds:    0:00:03
-ignoreUninstalledPrograms:False
-dpmsEnabled:    False
-dpmsQuickOff:   False
-dpmsStandby:    2:00:00
-dpmsSuspend:    2:00:00
-dpmsOff:        4:00:00
-grabDesktopImages:  False
-grabVideoFrames:    False
-chooseRandomImages: False
-imageDirectory:
-
-mode:           one
-selected:       0
-
-textMode:       url
-textLiteral:    XScreenSaver
-textFile:
-textProgram:    fortune
-textURL:        https://planet.debian.org/rss20.xml
-dialogTheme:    default
-settingsGeom:   259,154 1238,154
-
-programs:                                                                     \
-                                webscreensaver -url                           \
-                                  http://192.168.69.246:8081/share/IRFVnvi4SmhA>
-> 
-> squeezelite -n $PLAYER_NAME -o $SOUND_DEVICE -s $SERVER_IP &
-> unclutter-xfixes --timeout 8 --hide-on-touch &
-> /home/eksistenze/.config/startup/firefox.sh &
+> ```
+> sudo nano /etc/xdg/openbox/autostart
+> ```
+> Add the following:
+> ```
 > xscreensaver -no-splash &
-> onboard &
--------------------------------------------------
-sudo mkdir ~/.config/startup/
-sudo nano ~/.config/startup/firefox.sh
-
-#!/bin/bash
-
-/usr/bin/firefox \
-  -p YOUR_PROFILE_NAME_HERE
-  -url https://YOUR.URL.HERE/
-
-sudo /sbin/halt
-
-sudo chmod +x ~/.config/startup/firefox.sh
--------------------------------------------------
-sudo nano /etc/xdg/openbox/environment
-
-### Browser Homepage
-export TOUCH_URL=http://192.168.69.21:8123
--------------------------------------------------
-
--------------------------------------------------
-
-
-sudo nano ~/.profile
-[[ -z $DISPLAY && $XDG_VTNR -eq 1 ]] && exec xinit /usr/bin/openbox-session -- vt$(fgconsole)
-###[[ -z $DISPLAY && $XDG_VTNR -eq 1 ]] && startx
-####For now.  Final will be
-####[[ -z $DISPLAY && $XDG_VTNR -eq 1 ]] && startx -- -nocursor
-
--------------------------------------------------
-# enables onboard keyboard show when text box selected
-dconf write /org/onboard/auto-show/enabled true
-# "docks" onboard on bottom of the screen, not visible
-dconf write /org/onboard/window/docking-enabled true
-# don't resize window when onboard is shown, instead it is shown on top
-dconf write /org/onboard/window/docking-shrink-workarea false
-# enable Gnome accessibility(required for correct onboard behavior)
-dconf write /org/gnome/desktop/interface/toolkit-accessibility true
--------------------------------------------------
-firefox -CreateProfile eksistenze --headless --screenshot /dev/null
-cd ~/.config/mozilla/firefox/
-ls
-# you are looking for the profile you just created.
-# Firefox adds an eight character prefix to profile folders
-# XXXXXXXX.PROFILE_NAME
-cd /XXXXXXXX.PROFILE_NAME
-nano user.js
--------------------------------------------------
-user_pref("browser.sessionstore.resume_from_crash", false);
-user_pref("browser.ai.control.default", "blocked");
-user_pref("browser.ai.control.linkPreviewKeyPoints", "blocked");
-user_pref("browser.ai.control.pdfjsAltText", "blocked");
-user_pref("browser.ai.control.sidebarChatbot", "blocked");
-user_pref("browser.ai.control.smartTabGroups", "blocked");
-user_pref("browser.ai.control.translations", "blocked");
-user_pref("browser.newtabpage.activity-stream.feeds.section.topstories", false);
-user_pref("browser.newtabpage.activity-stream.showSponsored", false);
-user_pref("browser.newtabpage.activity-stream.showSponsoredCheckboxes", false);
-user_pref("browser.newtabpage.activity-stream.showSponsoredTopSites", false);
-user_pref("browser.newtabpage.disableNewTabAsAddon", true);
-user_pref("browser.profiles.enabled", false);
-user_pref("browser.shell.checkDefaultBrowser", false);
-user_pref("browser.shell.defaultBrowserCheckCount", 1);
-user_pref("browser.shell.didSkipDefaultBrowserCheckOnFirstRun", true);
-user_pref("browser.tabs.groups.smart.enabled", false);
-user_pref("browser.tabs.groups.smart.userEnabled", false);
-user_pref("datareporting.healthreport.uploadEnabled", false);
-user_pref("datareporting.policy.firstRunURL", "");
-user_pref("datareporting.usage.uploadEnabled", false);
-user_pref("extensions.formautofill.addresses.enabled", false);
-user_pref("extensions.formautofill.creditCards.enabled", false);
-user_pref("signon.rememberSignons", false);
-user_pref("trailhead.firstrun.didSeeAboutWelcome", true);
--------------------------------------------------
-sudo apt install -y squeezelite alsa-utils
-
-# Setup conf file
-# This gives a list of outputs.  You can read more about what each of these does to fit your particular setup.
-# For me, I just have a speaker plugged into my pi so I am using plughw:CARD=Headphones,DEV=0
-squeezelite -l
-sudo nano .config/squeezelite.conf
-
-SQUEEZELITE_OPTIONS="
--n TouchSqueeze
--o plughw:CARD=Headphones,DEV=0
--s http://192.168.69.21
-"
-
-# We are gonna pull squeezelite into the 2020s and start it as a systemd service.
-sudo rm -f /etc/init.d/squeezelite
-sudo nano /etc/systemd/system/squeezelite.service
-
-[Unit]
-Description=Squeezelite Player
-After=sound.target network-online.target
-
-[Service]
-Type=simple
-EnvironmentFile=~/.config/squeezelite.conf
-ExecStart=/usr/bin/squeezelite $SQUEEZELITE_OPTIONS
-Restart=on-failure
-RestartSec=5
-
-[Install]
-WantedBy=multi-user.target
-
-sudo systemctl enable squeezelite
--------------------------------------------------
-sudo apt install python3 python3-gi gir1.2-webkit2-4.1 gir1.2-gtk-3.0
-wget https://raw.githubusercontent.com/lmartinking/webscreensaver/master/webscreensaver
-sudo mv webscreensaver /usr/libexec/xscreensaver
-sudo chmod +x /usr/libexec/xscreensaver/webscreensaver
-cp ~/.xscreensaver ~/.xscreensaver.original
-sudo nano .xscreensaver
-alt + /
-ctrl + 6
-alt + \
-alt + t
-# XScreenSaver Preferences File
-# Written by xscreensaver-demo 6.09 for eksistenze on Mon Apr  6 22:14:29 2026.
-# https://www.jwz.org/xscreensaver/
-
-timeout:        0:10:00
-cycle:          0:10:00
-lock:           False
-lockTimeout:    0:00:00
-passwdTimeout:  0:00:30
-visualID:       default
-installColormap:    True
-verbose:        False
-splash:         True
-splashDuration: 0:00:05
-demoCommand:    xscreensaver-settings
-nice:           10
-fade:           True
-unfade:         True
-fadeSeconds:    0:00:03
-ignoreUninstalledPrograms:False
-dpmsEnabled:    False
-dpmsQuickOff:   False
-dpmsStandby:    2:00:00
-dpmsSuspend:    2:00:00
-dpmsOff:        4:00:00
-grabDesktopImages:  False
-grabVideoFrames:    False
-chooseRandomImages: False
-imageDirectory:
-
-mode:           one
-selected:       0
-
-textMode:       url
-textLiteral:    XScreenSaver
-textFile:
-textProgram:    fortune
-textURL:        https://planet.debian.org/rss20.xml
-dialogTheme:    default
-settingsGeom:   259,154 1238,154
-
-programs:                                                                     \
-                                webscreensaver -url                           \
-                                  http://192.168.69.246:8081/share/IRFVnvi4SmhA>
-
-
-pointerHysteresis:  10
-authWarningSlack:   20
+> ```
+### 5. Squeezelite
+Instructions for squeezelite are the same so I've put separated them.
+[Squeezelite Setup](squeezelite.md)
+## Success!
+You now have a working kiosk.
