@@ -9,7 +9,7 @@ If you want to get right to the guides the links are below.  If you want to read
 ---
 
 ### Hardware
-This is what I used.  I make no guarentee that it will work with anything else.  That being said, it should.  I'm not doing anything crazy.
+This is what I used.  I make no guarantee that it will work with anything else.  That being said, it should.  I'm not doing anything crazy.
 - Raspberry Pi 4 8GB
 - Dell P2418HT Touch Screen Monitor
   - Linux has pretty good support for touchscreens.  If you've got something odd, make sure it works.
