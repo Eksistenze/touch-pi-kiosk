@@ -77,12 +77,12 @@ D. Setup openbox startup
 > xset s off
 > unclutter-xfixes --timeout 8 --hide-on-touch &
 > ```
-> These turn off the energy star features, turn off screen blanking and turn off the screensaver.  We want to control all of that ourselves.
+> These turn off the energy star features, turn off screen blanking and turn off the screensaver.  We want to control all of that ourselves.  
 > It also starts `unclutter-xfixes`.  This is a utility that hides the mouse pointer and it good for touchscreens.
 ### 2. Setup browser.
 > I've splite the browser into two setups, depending on what you go with.  
 > [Chromium](xChromium.md) and [Firefox](xFirefox.md)  
-> Regardless of browser, we can use the openbox configuration to make the window maximized.  There are other options, if you are looking for a true kiosk mode.  I wanted access to tabs.
+> Regardless of browser, we can use the openbox configuration to make the window maximized.  There are other options, if you are looking for a true kiosk mode.  I wanted access to tabs.  
 > Openbox configuration can create keybinds, change behavior and themes.
 > 
 A. Create the director for your configuration.
@@ -127,8 +127,8 @@ If you wanna stop here and setup your own stuff, the pi should now startup with 
 > ```
 > onboard &
 > ```
-> Once these are configured, the keyboard should work.  You may have to restart.   
-> I also changed the theme for the keyboard but you can do that with the GUI.
+> Once these are configured, the keyboard should work.  You may have to restart.  
+> I also changed the theme for the keyboard but you can do that with the GUI.  
 ### 4. Screensaver
 `xscreensaver` is a wonderful program, first released in 1992!  
 While it has some EXCELLENT options that you should feel free to explore, I wanted a slideshow of pictures.  
@@ -154,7 +154,7 @@ Setting all that up is outside this guide's scope.  There are some great guides 
 > sudo chmod +x /usr/libexec/xscreensaver/webscreensaver
 > ```
 > e. Add the config for `webscreensaver`.
-> > ***optional*** If you already have xscreensaver setup and are following this, you probably already have a config file.
+> > ***optional*** If you already have xscreensaver setup and are following this, you probably already have a config file.  
 > > Check if `.screensaver` already exists:
 > > ```
 > > ls -a
@@ -225,7 +225,7 @@ Setting all that up is outside this guide's scope.  There are some great guides 
 > xscreensaver -no-splash &
 > ```
 ### 5. Squeezelite
-Instructions for squeezelite are the same so I've put separated them.
+Instructions for squeezelite are the same so I've put separated them.  
 [Squeezelite Setup](squeezelite.md)
 ## Success!
 You now have a working kiosk.
