@@ -7,7 +7,7 @@ This is a kindergarten guide.  I'm gonna break down everything cause I'm tired o
 - Setup your pi and monitor
   - You might need a mouse and keyboard for the initial setup.  This guide assumes that you are doing everything through SSH.  But stuff updates, stuff breaks, you might have a different setup.  Having a keyboard and mouse can make troubleshooting easier.  
 Basic Commands
-- `sudo` - Elevates the command priviledge.  Allows you to do things that change the system that regular permissions wouldn't allow.
+- `sudo` - Elevates the command privilege.  Allows you to do things that change the system that regular permissions wouldn't allow.
 - `apt` - The package manager for Debian.  It will grab software from pre-configured sources and install them on your system.
 - `nano` - Lightweight text editor.  To save a file, ctrl + o.  To exit, ctrl + x. To find text, ctrl + w.
   - If you are coming from Windows, this is a shift.  If I type the command `nano foo.bar`, it will create a file (if one doesn't exist) "foo" of file type "bar" and let me start typing in it.
@@ -15,7 +15,7 @@ Basic Commands
   - Most terminals will autocomplete, ie, if you start filling out a directory name, you can hit tab to fill in the rest.
   - The `cd` command by itself takes you back to the home directory (where you start).
   - `.` is the current directory, ie, `cd .` takes you to the directory you are in.
-  - `..` is the previous directory, ie, `cd ..` takes up up a level.
+  - `..` is the previous directory, ie, `cd ..` takes up a level.
   - `~` is the home directory.
 - `mkdir` - Creates a directory.
 - `rm` - Remove.  Pretty self explanatory.
@@ -42,7 +42,7 @@ C. Install the Software
 > sudo apt install labwc
 > ```
 ### 2. Setup labwc
-A. Creat a PAM configuration file for your specific user
+A. Create a PAM configuration file for your specific user
 > PAM manages permissions for services and allows labwc to start with automatic login
 > ```
 > sudo nano /etc/pam.d/YOUR_USERNAME_HERE
@@ -71,7 +71,7 @@ B. Setup labwc start on login
 > ```
 #### If you want to stop and reboot here to make sure it works, the command for that is ```sudo reboot```.  The only thing you should see is a blank screen with a mouse pointer, since we haven't setup any applications.  If not, just keep reading.
 ### 3. Setup Browser
-I tested both Chromium and Firefox.  Chromium runs noticably better but I went with Firefox.
+I tested both Chromium and Firefox.  Chromium runs noticeably better but I went with Firefox.
 - One, I support Firefox as an alternative to Chromium based browsers.
 - And two, I can install uBlock Origin and block ads.
 If you want to use Chromium, I've included instructions.  
@@ -92,7 +92,7 @@ B. Firefox is weird with their use of profiles so we are going to do this.
 > - `firefox` Starts Firefox
 > - `--CreateProfile` Creates the profile with the name you specified
 > - `--headless` Runs headless, as in Firefox doesn't display anything
-> - `--screenshot` Forces Firefox to fully start, as apposed to just creating the profile, which we want.
+> - `--screenshot` Forces Firefox to fully start, as opposed to just creating the profile, which we want.
 > - `/dev/null` Send that screenshot and any output straight to nowhere, since we don't want it.
 
 C. Move to the directory where firefox stores information and show the contents.
@@ -192,7 +192,7 @@ F. Setup script for halt on close.
 > sudo chmod +x ~/config/startup/firefox.sh
 > ```
 > A basic safety feature on linux is that scripts can't just run.  They have to have permission.
-> This gives the file executable priviledges.
+> This gives the file executable privileges.
 > 
 G. Start Firefox on boot.
 > ```
@@ -227,7 +227,7 @@ A. Install the software.
 > sudo apt install ./immichframe_0.1.0_LINUX_arm64.deb
 > ```
 > `cd` moves you to the home directory.
-> `wget` downloads the ImmichFrame Desktop linux client from their respository.  
+> `wget` downloads the ImmichFrame Desktop linux client from their repository.  
 > `apt` installs the package we just downloaded.
 > 
 B. Setup swayidle
@@ -247,7 +247,7 @@ B. Setup swayidle
 > > To exit the screensaver, tap towards the bottom of the screen.
 > Behavior without `-w`:
 > > Any touch on the screen kills the process.
-> `timeout 600` The amount of seconds before swayidle performs the action.
+> `timeout 600` The number of seconds before swayidle performs the action.
 > `GDK_BACKEND=wayland GDK_GL=gles` Variables to make immichFrame run better in Wayland.
 > `resume 'pkill immichframe'` What to do on activity, which is kill the immichFrame process.
 > > 
