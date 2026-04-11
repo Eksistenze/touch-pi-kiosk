@@ -1,5 +1,5 @@
 # Wayland
-This is a kindergarten guide.  I'm gonna break down everything cause I'm tired of guides that just tell you to do stuff and you have no idea what you are doing.
+This is a kindergarten guide.  I'm gonna break down everything cause I'm tired of guides that just tell you to do stuff and doesn't explain what you are doing.
 ### 0. Pre-setup
 - Flash your SD card with Raspberry Pi OS Lite (64 bit)
   - Setup WiFi (or use ethernet), username and password, and make sure SSH is enabled
