@@ -38,7 +38,7 @@ B. Setup script to start Chromium and halt on stop.
 > `--enable-wayland-ime` Tries to enable the Wayland input method (for OSK).  
 > `--no-first-run` Skips the annoying first run questions.  
 > `--no-default-browser-check` Doesn't check if Chromium is the default browser.  
-> `--noerrdialogs` Supresses error dialogs.  
+> `--noerrdialogs` Suppresses error dialogs.  
 > `https://YOUR.URL.HERE/` The URL that opens on start.  
 > Because of how bash commands operate, that line is not finished until Chromium closes.  
 > Once Chromium closes, it continues with the halt command.  
@@ -48,7 +48,7 @@ B. Setup script to start Chromium and halt on stop.
 > sudo chmod +x ~/config/startup/chromium.sh
 > ```
 > A basic safety feature on linux is that scripts can't just run.  They have to have permission.  
-> This gives the file executable priviledges.
+> This gives the file executable privileges.
 > 
 C. Add Chromium to labwc autostart
 > ```
