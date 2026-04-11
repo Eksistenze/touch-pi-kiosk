@@ -1,7 +1,7 @@
 # On Screen Keyboard
 For my OSK I went with [squeekboard](https://gitlab.gnome.org/World/Phosh/squeekboard).  The good folks at Raspberry Pi [forked](https://github.com/raspberrypi-ui/squeekboard) it and have it on one of their official repositories.  
 I tried [Maliit Keyboard](https://github.com/maliit/keyboard) but I just could not get it to work.  
-Unfortunately, squeekboard had it's own set of issues.  
+Unfortunately, squeekboard had its own set of issues.  
 #### Default behavior.
 - Tap a text input area on screen.
 - squeekboard shows from the bottom of the screen.
@@ -9,7 +9,7 @@ Unfortunately, squeekboard had it's own set of issues.
 If this works for you, just install squeekboard like any other app and follow the directions for labwc autostart.
 #### My desired behavior.
 - Tap a text input area on screen.
-- squeekboard shows from the bottome of the screen.
+- squeekboard shows from the bottom of the screen.
 - squeekboard is drawn ***on top of*** the Firefox window.
 
 Wayland has different "layers" that it draws on.  squeekboard, by [default](https://forums.raspberrypi.com/viewtopic.php?t=390053), is drawn on the top layer.  
@@ -66,7 +66,7 @@ E. Edit the code to change behavior.
 > > The line you replaced sets the exclusion zone.  
 > > The code you entered checks for a variable, `SQUEEKBOARD_NO_EXCLUSION=1`, that we can use when starting the app.  
 > > If the variable is present, it sets the exclusion zone to -1 (or nothing).  
-> > If the varialbe is not present, it sets the exclusion zone as normal.
+> > If the variable is not present, it sets the exclusion zone as normal.
 > 
 > b. Find the code `phosh_layer_surface_set_layer` with `ctrl + w`.
 > > This **should** take you to a comment above the function we are working with.
@@ -88,7 +88,7 @@ E. Edit the code to change behavior.
 > >   }
 > > ```
 > > This code checks for the variable, `SQUEEKBOARD_LAYER=overlay`, that, if present, changes the layer squeekboard is drawn on.
-> > Specifically it change it to `ZWLR_LAYER_SHELL_V1_LAYER_OVERLAY`.
+> > Specifically, it change it to `ZWLR_LAYER_SHELL_V1_LAYER_OVERLAY`.
 >
 > d. Fix a [bug](https://github.com/raspberrypi-ui/squeekboard/issues/10) that will stop the build from compiling.
 > > ```bash
@@ -99,7 +99,7 @@ E. Edit the code to change behavior.
 > > ```rust
 > >                 name: None,
 > > ```
-> > Should look liek this:
+> > Should look like this:
 > > ```rust
 > >         assert_eq!(
 > >             Application::get_preferred_height_and_arrangement(&OutputState {
@@ -141,7 +141,7 @@ I. Install the package
 > sudo dpkg -i ./squeekboard_X.XX.X-1+rpt1_arm64.deb
 > ```
 J. Change system setting to make squeekboard work.
-> This enables the on screen keyboard accessability setting.
+> This enables the on screen keyboard accessibility setting.
 > ```
 > gsettings set org.gnome.desktop.a11y.applications screen-keyboard-enabled true
 > ```
