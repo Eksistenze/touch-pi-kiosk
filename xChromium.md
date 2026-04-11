@@ -40,7 +40,7 @@ B. Setup script to start Chromium and halt on stop.
 >
 > Make the script executable.
 > ```
-> sudo chmod +x ~/config/startup/chromium.sh
+> sudo chmod +x ~/.config/startup/chromium.sh
 > ```
 > A basic safety feature on linux is that scripts can't just run.  They have to have permission.  
 > This gives the file executable priviledges.
