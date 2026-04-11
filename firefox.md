@@ -3,7 +3,7 @@ Firefox tracks all profile preferences and saves them locally at
 ```
 ~/.config/mozilla/firefox/XXXXXXXX.YOUR_PROFILE_NAME/
 ```
-It saves them to a files called `prefs.js`.  But since firefox uses that file, it doesn't preserve changes you make to it.
+It saves them to a file called `prefs.js`.  But since firefox uses that file, it doesn't preserve changes you make to it.
 Instead, it looks for a file called `user.js` and uses any values in there to override settings in `prefs.js`.
 There are a [ton](https://github.com/yokoffing/Betterfox) you can [find](https://github.com/arkenfox/user.js/) online to customize your firefox experience.  Here's mine and what everything does:
 > Don't resume from crash.
