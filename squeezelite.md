@@ -42,7 +42,7 @@ if you want really good audio.  I just wanted a kitchen speaker.
 > ```
 3. Starting up squeezelite
 > You can start squeezelite using the labwc autostart file but I don't really like to.  
-> labwc has some limitations, by design, and doesn't impliment any kind of restart on crash.  
+> labwc has some limitations, by design, and doesn't implement any kind of restart on crash.  
 > So I like to setup squeezelite as a systemd service.
 > ```
 > sudo rm -f /etc/init.d/squeezelite
@@ -75,7 +75,7 @@ if you want really good audio.  I just wanted a kitchen speaker.
 > `EnvironmentFile` Pulls in the file we created earlier.  
 > `ExecStart` What to do on start, namely start the app with the config we created.  
 > `Restart` This is why I like to do this.  Is squeezelite fails, the system will automatically try to restart the service.  
-> `[Install]` Tells systemctl what do do when we enable this service.  
+> `[Install]` Tells systemctl what to do when we enable this service.  
 > `WantedBy=multi-user.target` Creates a link between startup and this service so when the pi starts up, it tries to start this as well.  
 4. Enabling squeezelite
 > ```
