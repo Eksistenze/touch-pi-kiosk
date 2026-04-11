@@ -7,7 +7,7 @@ This is a kindergarten guide.  I'm gonna break down everything cause I'm tired o
 - Setup your pi and monitor
   - You might need a mouse and keyboard for the initial setup.  This guide assumes that you are doing everything through SSH.  But stuff updates, stuff breaks, you might have a different setup.  Having a keyboard and mouse can make troubleshooting easier.  
 Basic Commands
-- `sudo` - Elevates the command priviledge.  Allows you to do things that change the system that regular permissions wouldn't allow.
+- `sudo` - Elevates the command privilege.  Allows you to do things that change the system that regular permissions wouldn't allow.
 - `apt` - The package manager for Debian.  It will grab software from pre-configured sources and install them on your system.
 - `nano` - Lightweight text editor.  To save a file, ctrl + o.  To exit, ctrl + x. To find text, ctrl + w.
   - If you are coming from Windows, this is a shift.  If I type the command `nano foo.bar`, it will create a file (if one doesn't exist) "foo" of file type "bar" and let me start typing in it.
@@ -15,7 +15,7 @@ Basic Commands
   - Most terminals will autocomplete, ie, if you start filling out a directory name, you can hit tab to fill in the rest.
   - The `cd` command by itself takes you back to the home directory (where you start).
   - `.` is the current directory, ie, `cd .` takes you to the directory you are in.
-  - `..` is the previous directory, ie, `cd ..` takes up up a level.
+  - `..` is the previous directory, ie, `cd ..` takes up a level.
   - `~` is the home directory.
 - `mkdir` - Creates a directory.
 - `rm` - Remove.  Pretty self explanatory.
@@ -80,7 +80,7 @@ D. Setup openbox startup
 > These turn off the energy star features, turn off screen blanking and turn off the screensaver.  We want to control all of that ourselves.  
 > It also starts `unclutter-xfixes`.  This is a utility that hides the mouse pointer and it good for touchscreens.
 ### 2. Setup browser.
-> I've splite the browser into two setups, depending on what you go with.  
+> I've split the browser into two setups, depending on what you go with.  
 > [Chromium](xChromium.md) and [Firefox](xFirefox.md)  
 > Regardless of browser, we can use the openbox configuration to make the window maximized.  There are other options, if you are looking for a true kiosk mode.  I wanted access to tabs.  
 > Openbox configuration can create keybinds, change behavior and themes.
@@ -145,7 +145,7 @@ Setting all that up is outside this guide's scope.  There are some great guides 
 > ```
 > wget https://raw.githubusercontent.com/lmartinking/webscreensaver/master/webscreensaver
 > ```
-> c. Move the screensaver to the directory where are the rest are kept.
+> c. Move the screensaver to the directory where the rest are kept.
 > ```
 > sudo mv webscreensaver /usr/libexec/xscreensaver
 > ```
@@ -170,7 +170,7 @@ Setting all that up is outside this guide's scope.  There are some great guides 
 > Add the following:
 > ```
 > # XScreenSaver Preferences File
-> # Written by xscreensaver-demo 6.09 for eksistenze on Mon Apr  6 22:14:29 2026.
+> # Written by xscreensaver-demo 6.09 for eksistenze on Mon Apr  20 00:06:09 2025.
 > # https://www.jwz.org/xscreensaver/
 > 
 > timeout:        0:10:00
@@ -225,7 +225,7 @@ Setting all that up is outside this guide's scope.  There are some great guides 
 > xscreensaver -no-splash &
 > ```
 ### 5. Squeezelite
-Instructions for squeezelite are the same so I've put separated them.  
+Instructions for squeezelite are the same so I've separated them.  
 [Squeezelite Setup](squeezelite.md)
 ## Success!
 You now have a working kiosk.
