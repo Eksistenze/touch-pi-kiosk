@@ -1,6 +1,6 @@
 # Setup Firefox on X11
 A. Ensure Firefox is installed.
-> If you are following the guide, you should have alread done that but, if not, this is the commmand.
+> If you are following the guide, you should have already done that but, if not, this is the commmand.
 > ```
 > sudo apt install firefox
 > ```
@@ -15,7 +15,7 @@ B. Firefox is weird with their use of profiles so we are going to do this.
 > - `firefox` Starts Firefox
 > - `--CreateProfile` Creates the profile with the name you specified
 > - `--headless` Runs headless, as in Firefox doesn't display anything
-> - `--screenshot` Forces Firefox to fully start, as apposed to just creating the profile, which we want.
+> - `--screenshot` Forces Firefox to fully start, as opposed to just creating the profile, which we want.
 > - `/dev/null` Send that screenshot and any output straight to nowhere, since we don't want it.
 
 C. Move to the directory where firefox stores information and show the contents.
