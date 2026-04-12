@@ -176,7 +176,7 @@ F. Setup script for halt on close.
 > #!/bin/bash
 > 
 > /usr/bin/firefox \
->   -p YOUR_PROFILE_NAME_HERE
+>   -p YOUR_PROFILE_NAME_HERE \
 >   -url https://YOUR.URL.HERE/
 > 
 > sudo /sbin/halt
