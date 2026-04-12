@@ -138,7 +138,7 @@ H. Move into the directory and compile.
 > ```
 I. Install the package
 > ```
-> sudo dpkg -i ./squeekboard_X.XX.X-1+rpt1_arm64.deb
+> sudo dpkg -i ../squeekboard_X.XX.X-1+rpt1_arm64.deb
 > ```
 J. Change system setting to make squeekboard work.
 > This enables the on screen keyboard accessibility setting.
