@@ -189,7 +189,7 @@ F. Setup script for halt on close.
 >
 > Make the script executable.
 > ```
-> sudo chmod +x ~/config/startup/firefox.sh
+> sudo chmod +x ~/.config/startup/firefox.sh
 > ```
 > A basic safety feature on linux is that scripts can't just run.  They have to have permission.
 > This gives the file executable privileges.
