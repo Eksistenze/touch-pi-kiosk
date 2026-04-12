@@ -94,7 +94,7 @@ E. Edit the code to change behavior.
 > > ```bash
 > > sudo nano ./squeekboard-X.XX.X/src/state.rs
 > > ```
-> > Find `Application::get_preferred_height_and_arrangement(&OutputState` and scroll down.
+> > Find `fn scaling_test_wide(pixel_width:` and scroll down.
 > > Add the following after `scale,`
 > > ```rust
 > >                 name: None,
